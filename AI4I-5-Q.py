@@ -1,9 +1,17 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+
 from sklearn.model_selection import train_test_split
-# from sklearn.metrics import mean_absolute_error
-# from sklearn.metrics import mean_squared_error
+
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+
+from sklearn.model_selection import KFold
+
+from sklearn.ensemble import RandomForestRegressor
 
 
 # Seen Data (used for training)
@@ -26,6 +34,11 @@ print('Correlation between BsmtFinSF1 and SalePrice: ' + str(train['BsmtFinSF1']
 print('Missing value for PoolQC : '+ str((train.PoolQC.isnull().sum())))
 print('Missing value for MiscFeature  : '+ str((train.MiscFeature .isnull().sum())))
 print('Missing value for LotFrontage : '+ str((train.LotFrontage.isnull().sum())))
+
+##################################
+# scikit-learn dataset is called bunch
+# iris.data.shape => samples are in rows, features are in coluumn
+
 
 # X = pd.get_dummies(train.iloc[:,0:9])
 # y = train.iloc[:, 9]
@@ -53,3 +66,5 @@ print('Missing value for LotFrontage : '+ str((train.LotFrontage.isnull().sum())
 # # Use scikit-learn to calculate the MAE
 # mae_two = mean_absolute_error(y_test, predictions)
 # print('Using scikit-lean, the error is {}'.format(mae_two))
+
+
