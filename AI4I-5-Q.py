@@ -8,8 +8,11 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score, precision_score, recall_score
+from sklearn.metrics import make_scorer
 
 from sklearn.model_selection import KFold
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import import RandomizedSearchCXV
 
 from sklearn.ensemble import RandomForestRegressor
 
@@ -19,7 +22,7 @@ from sklearn.ensemble import RandomForestRegressor
 
 train = pd.read_csv("train.csv")
 # print(len(train))
-# print(train.info())
+print(train.info())
 print('Median value for SalePrice: '+ str(np.median(train['SalePrice'])))
 print('Unique Values in SaleType: '+ str(len(train.SaleType.unique())))
 
