@@ -2,17 +2,19 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from sklearn.model_selection import train_test_split
-
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.metrics import make_scorer
+from sklearn.metrics import r2_score
 
+from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import import RandomizedSearchCXV
+
+from sklearn.linear_model import LinearRegression
 
 from sklearn.ensemble import RandomForestRegressor
 
@@ -37,6 +39,32 @@ print('Correlation between BsmtFinSF1 and SalePrice: ' + str(train['BsmtFinSF1']
 print('Missing value for PoolQC : '+ str((train.PoolQC.isnull().sum())))
 print('Missing value for MiscFeature  : '+ str((train.MiscFeature .isnull().sum())))
 print('Missing value for LotFrontage : '+ str((train.LotFrontage.isnull().sum())))
+
+
+# Create arrays for features and target variable
+y = train['life'].values
+X = train['fertility'].values
+
+# Reshape X and y
+y = y.reshape(-1,1)
+X = X.reshape(-1,1)
+
+# Create training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
+
+# Create the regressor: reg_all
+reg_all = LinearRegression()
+
+# Fit the regressor to the training data
+reg_all.fit(X_train,y_train)
+
+# Predict on the test data: y_pred
+y_pred = reg_all.predict(X_test)
+
+# Compute and print R^2 and RMSE
+print("R^2: {}".format(reg_all.score(X_test, y_test)))
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+print("Root Mean Squared Error: {}".format(rmse))
 
 ##################################
 # scikit-learn dataset is called bunch
