@@ -584,7 +584,7 @@ kfold = cross_val_score(model, X, y, cv=5)
 # Print the mean accuracy per fold
 kfold.mean()
 
-# Printt the std per fold
+# Print the std per fold
 kfold.std()
 
 Tips for neural networks hyperparameter tuningg
